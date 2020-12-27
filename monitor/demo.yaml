@@ -1,0 +1,39 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: demo-app-jmx
+  namespace: demo-jmx
+  labels:
+    app: demo-app
+spec:
+  endpoints:
+  - interval: 5s
+    port: http-jvm
+    path: /
+  namespaceSelector:
+    matchNames:
+    - demo-jmx
+  selector:
+    matchLabels:
+      app: demo-app
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: demo-app-actuator
+  namespace: demo-jmx
+  labels:
+    app: demo-app
+spec:
+  endpoints:
+  - interval: 5s
+    port: http-app
+    path: /actuator/prometheus
+  jobLabel: demo-app
+  namespaceSelector:
+    matchNames:
+    - demo-jmx
+  selector:
+    matchLabels:
+      app: demo-app
