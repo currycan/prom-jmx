@@ -11,6 +11,7 @@ spec:
   - interval: 5s
     port: http-jvm
     path: /
+  jobLabel: demo-app-jmx
   namespaceSelector:
     matchNames:
     - demo-jmx
@@ -30,7 +31,7 @@ spec:
   - interval: 5s
     port: http-app
     path: /actuator/prometheus
-  jobLabel: demo-app
+  jobLabel: demo-app-actuator
   namespaceSelector:
     matchNames:
     - demo-jmx
